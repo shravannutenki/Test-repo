@@ -1,0 +1,48 @@
+#define PinA 25 
+#define PinB 26 
+#define PinSW 27
+unsigned long cur_time = 0; 
+long count = 0; 
+long num = 0;
+int i = 0;
+
+void setup()
+{
+  Serial.begin(115200);
+  
+  pinMode(PinA,INPUT_PULLUP); 
+  pinMode(PinB,INPUT_PULLUP);
+  pinMode(PinSW,INPUT_PULLUP); 
+
+  attachInterrupt(PinA, blinkA, FALLING);  
+  attachInterrupt(PinB, blinkB, FALLING);  
+attachInterrupt(PinSW, btn, FALLING);  
+  cur_time = millis();
+  Serial.println("Hello");
+}
+
+void loop()
+{
+
+    Serial.println(count);
+    delay(1000); // increased delay
+
+
+  
+}
+void btn(){
+   Serial.println("Hello");
+}
+void blinkA()
+{
+  if ((millis() - cur_time) > 3)
+        count ++; 
+  cur_time = millis();
+}
+
+void blinkB()
+{
+  if ((millis() - cur_time) > 3)  
+        count --;
+  cur_time = millis();
+}
